@@ -1,0 +1,22 @@
+services:
+  planner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: paper-cut-planner:latest
+    container_name: paper-cut-planner
+    ports:
+      - "8080:8080"
+    environment:
+      # 访问端口（容器内）；宿主机端口见左侧映射
+      PORT: "8080"
+      # SQLite 数据库文件位置（挂载到命名卷持久化）
+      DB_PATH: /data/planner.db
+      # 首次启动且库为空时，写入示例库存与示例订单；置 false 可得空库
+      SEED: "true"
+    volumes:
+      - planner-data:/data
+    restart: unless-stopped
+
+volumes:
+  planner-data:

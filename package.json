@@ -1,0 +1,25 @@
+{
+  "name": "paper-cut-planner",
+  "private": true,
+  "version": "1.0.0",
+  "description": "小型纸品工坊浏览器裁切规划台",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "build:shared": "npm run build -w @pcp/shared",
+    "build:server": "npm run build -w @pcp/server",
+    "build:client": "npm run build -w @pcp/client",
+    "build": "npm run build:shared && npm run build:server && npm run build:client",
+    "dev:server": "npm run dev -w @pcp/server",
+    "dev:client": "npm run dev -w @pcp/client",
+    "dev": "concurrently -k -n server,web -c blue,green \"npm run dev:server\" \"npm run dev:client\"",
+    "start": "npm run start -w @pcp/server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.4"
+  }
+}
